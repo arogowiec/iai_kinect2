@@ -76,7 +76,7 @@ You can also change the registration method with `_reg_method:=<cpu|opencl>`.
 If that is the case, you have to make sure that `Protonect` uses the same version of `libfreenect2` as `kinect2_bridge` does.
 To do so, run `make` and `sudo make install` in the build folder again. And try out `kinect2_bridge` again.
 
-```
+```bash
 cd libfreenect2/build
 make & sudo make install
 ```
@@ -85,7 +85,7 @@ Also make sure that you are not using OpenCV 3.0.
 
 If it is still crashing, compile it in debug and run it with gdb:
 
-```
+```bash
 cd <catkin_ws>
 catkin_make -DCMAKE_BUILD_TYPE="Debug"
 cd devel/lib/kinect2_bridge
@@ -140,7 +140,7 @@ If you found no solution in the issues, feel free to open a new issue for your p
 
 4. Clone this repository into your catkin workspace, install the dependencies and build it:
 
-   ```
+```bash
 cd ~/catkin_ws/src/
 git clone https://github.com/code-iai/iai_kinect2.git
 cd iai_kinect2
@@ -149,17 +149,16 @@ cd ~/catkin_ws
 catkin_make -DCMAKE_BUILD_TYPE="Release"
 ```
 
-   *Note: `rosdep` will output errors on not being able to locate `[kinect2_bridge]` and `[depth_registration]`.
-   That is fine because they are all part of the iai_kinect2 package and `rosdep` does not know these packages.*
+   *Note: `rosdep` will output errors on not being able to locate `[kinect2_bridge]` and `[depth_registration]`. That is fine because they are all part of the iai_kinect2 package and `rosdep` does not know these packages.*
 
-   *Note: If you installed libfreenect2 somewhere else than in `$HOME/freenect2` or a standard location like `/usr/local`
-   you have to specify the path to it by adding `-Dfreenect2_DIR=path_to_freenect2/lib/cmake/freenect2` to `catkin_make`.*
+   *Note: If you installed libfreenect2 somewhere else than in `$HOME/freenect2` or a standard location like `/usr/local` you have to specify the path to it by adding `-Dfreenect2_DIR=path_to_freenect2/lib/cmake/freenect2` to `catkin_make`.*
 
 5. Connect your sensor and run `kinect2_bridge`:
 
-   ```
+```bash
 roslaunch kinect2_bridge kinect2_bridge.launch
 ```
+
 6. Calibrate your sensor using the `kinect2_calibration`. [Further details](kinect2_calibration#calibrating-the-kinect-one)
 7. Add the calibration files to the `kinect2_bridge/data/<serialnumber>` folder. [Further details](kinect2_bridge#first-steps)
 8. Restart `kinect2_bridge` and view the results using `rosrun kinect2_viewer kinect2_viewer kinect2 sd cloud`.
@@ -169,30 +168,24 @@ roslaunch kinect2_bridge kinect2_bridge.launch
 ### OpenCL with AMD
 
 Install the latest version of the AMD Catalyst drivers from https://support.amd.com and follow the instructions. Also install `opencl-headers`.
-
-```
+```bash
 sudo apt-get install opencl-headers
 ```
-
 ### OpenCL/CUDA with Nvidia
 
 Go to [developer.nvidia.com/cuda-downloads](https://developer.nvidia.com/cuda-downloads) and select `linux`, `x86_64`, `Ubuntu`, `14.04`, `deb(network)`.
 Download the file and follow the instructions. Also install `nvidia-modprobe` and `opencl-headers`.
-
-```
+```bash
 sudo apt-get install nvidia-modprobe opencl-headers
 ```
 
 You also need to add CUDA paths to the system environment, add these lines to you `~/.bashrc`:
-
-```
+```bash
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:${LD_LIBRARY_PATH}"
 export PATH="/usr/local/cuda/bin:${PATH}"
 ```
-
 A system-wide configuration of the libary path can be created with the following commands:
-
-```
+```bash
 echo "/usr/local/cuda/lib64" | sudo tee /etc/ld.so.conf.d/cuda.conf
 sudo ldconfig
 ```
@@ -201,16 +194,13 @@ sudo ldconfig
 
 You can either install a binary package from a PPA like [ppa:floe/beignet](https://launchpad.net/~floe/+archive/ubuntu/beignet), or build beignet yourself.
 It's recommended to use the binary from the PPA.
-
-```
+```bash
 sudo add-apt-repository ppa:floe/beignet && sudo apt-get update
 sudo apt-get install beignet beignet-dev opencl-headers
 ```
-
 ## Citation
 
 If you used `iai_kinect2` for your work, please cite it.
-
 ```tex
 @misc{iai_kinect2,
   author = {Wiedemeyer, Thiemo},
@@ -222,9 +212,7 @@ If you used `iai_kinect2` for your work, please cite it.
   note = {Accessed June 12, 2015}
 }
 ```
-
 The result should look something similar to this (may depend on the bibliography style used):
-
 ```
 T. Wiedemeyer, “IAI Kinect2,” https://github.com/code-iai/iai_kinect2,
 Institute for Artificial Intelligence, University Bremen, 2014 – 2015,
